@@ -11,15 +11,14 @@ export const Footer = () => {
       fillWidth
       padding="8"
       horizontal="center"
-      mobileDirection="column"
     >
       <Flex
         className={styles.mobile}
         maxWidth="m"
         paddingY="8"
         paddingX="16"
-        gap="16"
-        horizontal="space-between"
+  gap="16"
+  horizontal="between"
         vertical="center"
       >
         <Text variant="body-default-s" onBackground="neutral-strong">
@@ -51,7 +50,7 @@ export const Footer = () => {
           )}
         </Flex>
       </Flex>
-      <Flex height="80" show="s"></Flex>
+  <Flex height="80" />
     </Flex>
   );
 };

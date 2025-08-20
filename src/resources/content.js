@@ -1,70 +1,47 @@
 import { Logo } from "@once-ui-system/core";
 
 const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+  firstName: "Leul",
+  lastName: "Tadesse",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
+  role: "Junior Software Engineer",
   avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  email: "leulteferi273@gmail.com",
+  location: "Addis Ababa, Ethiopia",
+  languages: ["English", "Amharic"],
 };
 
 const newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: (
-    <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
-    </>
-  ),
+  display: false,
+  title: <>Subscribe</>,
+  description: (<>I don't currently send a newsletter.</>),
 };
 
 const social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
-  },
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
-  },
-  {
-    name: "Email",
-    icon: "email",
-    link: `mailto:${person.email}`,
-  },
+  { name: "GitHub", icon: "github", link: "https://github.com/cooleo273" },
+  { name: "LinkedIn", icon: "linkedin", link: "https://linkedin.com/in/leul-tadesse-386bb3225" },
+  { name: "Website", icon: "link", link: "https://leul-portfolio-273.vercel.app" },
+  { name: "Email", icon: "email", link: `mailto:${person.email}` },
 ];
 
 const home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  title: `${person.name} – ${person.role}`,
+  description: `Portfolio of ${person.name}, ${person.role} from ${person.location}`,
+  headline: <>Building full‑stack web applications and tools</>,
   featured: {
-    display: true,
-    title: <>Recent project: <strong className="ml-4">Once UI</strong></>,
-    href: "/work/building-once-ui-a-customizable-design-system",
+    display: false,
+    title: <>Recent project</>,
+    href: "/",
   },
   subline: (
     <>
-      I'm Selene, a design engineer at <Logo icon="/trademarks/wordmark-dark.svg" style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}/>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      I'm {person.name}, a Junior Software Engineer focused on building full‑stack applications
+      <br /> using TypeScript, Next.js, and PostgreSQL.
     </>
   ),
 };
@@ -85,14 +62,14 @@ const about = {
     display: true,
     link: "https://cal.com",
   },
-  intro: {
+    intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        {person.name} is a results-driven Junior Software Engineer with a background in Electrical
+        Engineering. Skilled in the MERN stack, TypeScript, PostgreSQL, and building end-to-end
+        applications from concept to deployment.
       </>
     ),
   },
@@ -101,41 +78,45 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Shega Media and Technologies",
+        timeframe: "Nov 2024 – Present",
+        role: "Software Developer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Built an in-house survey collection platform with Next.js and Supabase that reduced
+            feedback analysis time by ~40%.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Architected an internal profitability dashboard that improved forecast accuracy by
+            over 15%.
+          </>,
+          <>
+            Implemented an HR automation system using Microsoft Power Apps saving ~10 hours/week
+            in manual entry.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Nexus Replay",
+        timeframe: "Jun 2024 – Sep 2024",
+        role: "Lead Developer & Architect",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Architected and built the Nexus backtesting platform end-to-end, handling UI/UX,
+            front-end and back-end engineering.
           </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Schimerol",
+        timeframe: "Feb 2024 – May 2024",
+        role: "Software Developer",
+        achievements: [
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Led full product development and engineered a highly available backend with
+            robust API endpoints.
           </>,
         ],
         images: [],
@@ -147,12 +128,8 @@ const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Hawassa University",
+        description: <>B.Sc. in Electrical Engineering (2020–2023). Transferred from Mekelle University (2018–2020).</>,
       },
     ],
   },
@@ -196,22 +173,35 @@ const about = {
   },
 };
 
+// Replace technical skills with resume skills
+const technical = {
+  display: true,
+  title: "Technical skills",
+  skills: [
+    { title: "React", description: <>Building interactive UIs with React.</> },
+    { title: "Next.js", description: <>Server-side rendering and full-stack apps with Next.js.</> },
+    { title: "TypeScript", description: <>Type-safe JavaScript for scalable apps.</> },
+    { title: "Node.js", description: <>Backend services and APIs.</> },
+    { title: "PostgreSQL", description: <>Relational data modeling and queries.</> },
+    { title: "MongoDB", description: <>NoSQL databases for flexible schemas.</> },
+    { title: "Supabase", description: <>Realtime database and auth for Next.js apps.</> },
+    { title: "Prisma", description: <>Type-safe ORM for Node.js.</> },
+    { title: "MS Power Apps", description: <>Business automation tools.</> },
+  ],
+};
+
 const blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  title: "Writing",
+  description: `Notes and tutorials by ${person.name}`,
 };
 
 const work = {
   path: "/work",
   label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  description: `Software projects and case studies by ${person.name}`,
 };
 
 const gallery = {
@@ -265,4 +255,16 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+// Personal projects from resume
+const projects = [
+  {
+    slug: "full-stack-ecommerce",
+    title: "Full-Stack E-Commerce Platform",
+    description:
+      "Developed a complete e-commerce application (MERN) with product catalogs, auth, shopping cart, and payment integration.",
+    images: [],
+    href: "/work/full-stack-ecommerce",
+  },
+];
+
+export { person, social, newsletter, home, about, blog, work, gallery, projects, technical };
