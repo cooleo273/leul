@@ -260,9 +260,9 @@ export default function About() {
                     <Text variant="body-default-m" onBackground="neutral-weak">
                       {skill.description}
                     </Text>
-                    {skill.images && skill.images.length > 0 && (
+                    {(skill as any).images && (skill as any).images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
+                        {(skill as any).images.map((image: any, index: number) => (
                           <Flex
                             key={index}
                             border="neutral-medium"

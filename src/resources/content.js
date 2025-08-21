@@ -2,7 +2,8 @@ import { Logo } from "@once-ui-system/core";
 
 const person = {
   firstName: "Leul",
-  lastName: "Tadesse",
+    display: false,
+    path: "/gallery",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
@@ -155,15 +156,15 @@ const technical = {
   display: true,
   title: "Technical skills",
   skills: [
-    { title: "React", description: <>Building interactive UIs with React.</> },
-    { title: "Next.js", description: <>Server-side rendering and full-stack apps with Next.js.</> },
-    { title: "TypeScript", description: <>Type-safe JavaScript for scalable apps.</> },
-    { title: "Node.js", description: <>Backend services and APIs.</> },
-    { title: "PostgreSQL", description: <>Relational data modeling and queries.</> },
-    { title: "MongoDB", description: <>NoSQL databases for flexible schemas.</> },
-    { title: "Supabase", description: <>Realtime database and auth for Next.js apps.</> },
-    { title: "Prisma", description: <>Type-safe ORM for Node.js.</> },
-    { title: "MS Power Apps", description: <>Business automation tools.</> },
+  { title: "React", description: <>Building interactive UIs with React.</>, images: [] },
+  { title: "Next.js", description: <>Server-side rendering and full-stack apps with Next.js.</>, images: [] },
+  { title: "TypeScript", description: <>Type-safe JavaScript for scalable apps.</>, images: [] },
+  { title: "Node.js", description: <>Backend services and APIs.</>, images: [] },
+  { title: "PostgreSQL", description: <>Relational data modeling and queries.</>, images: [] },
+  { title: "MongoDB", description: <>NoSQL databases for flexible schemas.</>, images: [] },
+  { title: "Supabase", description: <>Realtime database and auth for Next.js apps.</>, images: [] },
+  { title: "Prisma", description: <>Type-safe ORM for Node.js.</>, images: [] },
+  { title: "MS Power Apps", description: <>Business automation tools.</>, images: [] },
   ],
 };
 
