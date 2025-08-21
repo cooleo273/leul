@@ -2,8 +2,9 @@ import { Logo } from "@once-ui-system/core";
 
 const person = {
   firstName: "Leul",
-    display: false,
-    path: "/gallery",
+  lastName: "Tadesse",
+  display: false,
+  path: "/gallery",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
