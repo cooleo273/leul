@@ -137,39 +137,16 @@ const about = {
     display: true, // set to false to hide this section
     title: "Technical skills",
     skills: [
-      {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-    ],
+    { title: "React", description: <>Building interactive UIs with React.</> },
+    { title: "Next.js", description: <>Server-side rendering and full-stack apps with Next.js.</> },
+    { title: "TypeScript", description: <>Type-safe JavaScript for scalable apps.</> },
+    { title: "Node.js", description: <>Backend services and APIs.</> },
+    { title: "PostgreSQL", description: <>Relational data modeling and queries.</> },
+    { title: "MongoDB", description: <>NoSQL databases for flexible schemas.</> },
+    { title: "Supabase", description: <>Realtime database and auth for Next.js apps.</> },
+    { title: "Prisma", description: <>Type-safe ORM for Node.js.</> },
+    { title: "MS Power Apps", description: <>Business automation tools.</> },
+  ],
   },
 };
 
