@@ -8,7 +8,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Junior Software Engineer",
+  role: "Software Engineer",
   avatar: "/images/avatar.jpg",
   email: "leulteferi273@gmail.com",
   location: "Addis Ababa, Ethiopia",
