@@ -52,3 +52,32 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+  /* Ensure local content images are not cropped by default components that set object-fit: cover.
+     Use `contain` so images scale to fit their container while preserving aspect ratio.
+     Exclude the avatar image to keep its circular crop intact. */
+  img[src^="/images/"]:not([src$="avatar.jpg"]) {
+    object-fit: contain !important;
+    object-position: center center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Also target images rendered inside MDX or gallery components */
+  .markdown img, .gallery img, .project-media img {
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+
+  /* Target elements that use background-image (Next/Image placeholder or blurred placeholder containers). */
+  [style*="background-image"]:not([style*="avatar.jpg"]) {
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Specific helpers for once-ui or carousel wrappers (defensive) */
+  .once-ui-media, .carousel-slide, .project-media, .markdown .media {
+    background-size: contain !important;
+    background-position: center center !important;
+  }

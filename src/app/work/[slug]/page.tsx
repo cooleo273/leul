@@ -82,6 +82,7 @@ export default async function Project({
           radius="m"
           alt="image"
           src={post.metadata.images[0]}
+          objectFit="contain"
         />
       )}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
