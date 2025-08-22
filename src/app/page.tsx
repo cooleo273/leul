@@ -2,11 +2,14 @@ import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Meta, Schema } from "@once-ui-system/core";
 import { home, about, person, newsletter, baseURL, routes } from "@/resources";
+import { loadTranslations } from '@/i18n';
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 
-export default function Home() {
+export default async function Home() {
+  const translations = loadTranslations('en');
+  const tHome = (translations && translations.home) || {};
   return (
     <Column maxWidth="m" gap="xl" horizontal="center">
       <Schema
@@ -34,12 +37,12 @@ export default function Home() {
           )}
           <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
             <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
+              {tHome.headline || home.headline}
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
+              {tHome.subline ? tHome.subline.replace('{{name}}', person.name) : home.subline}
             </Text>
           </RevealFx>
           <RevealFx paddingTop="12" delay={0.4} horizontal="start" paddingLeft="12">

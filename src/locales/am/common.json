@@ -1,0 +1,12 @@
+{
+  "home": {
+    "headline": "የፉልስታክ ድር መተግበሪያዎችን እና መሣሪያዎችን እገነባለሁ",
+    "subline": "እኔ {{name}} ነኝ፣ የNext.js፣ TypeScript እና PostgreSQL ታሪክ ያለው ሶፍትዌር እንጂነር ነኝ።"
+  },
+  "nav": {
+    "home": "ዋና",
+    "about": "ስለ",
+    "work": "ስራ",
+    "blog": "ብሎግ"
+  }
+}

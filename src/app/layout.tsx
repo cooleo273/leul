@@ -6,15 +6,17 @@ import classNames from "classnames";
 
 import { Background, Column, Flex, Meta, opacity, SpacingToken, LayoutProvider } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from '@/components';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
 export async function generateMetadata() {
+  const image = home.image && home.image.startsWith('http') ? home.image : `${baseURL}${home.image}`;
   return Meta.generate({
     title: home.title,
     description: home.description,
     baseURL: baseURL,
     path: home.path,
-    image: home.image,
+    image,
   });
 }
 
@@ -141,6 +143,9 @@ export default async function RootLayout({
           />
           <Flex fillWidth minHeight="16" hide={true}/>
             <Header />
+            <div style={{ position: 'absolute', top: 16, right: 16 }}>
+              <LanguageSwitcher />
+            </div>
             <Flex
               zIndex={0}
               fillWidth

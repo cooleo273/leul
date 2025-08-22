@@ -1,0 +1,12 @@
+{
+  "home": {
+    "headline": "Building full‑stack web applications and tools",
+    "subline": "I'm {{name}}, a Software Engineer focused on Next.js, TypeScript, and PostgreSQL."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "work": "Work",
+    "blog": "Blog"
+  }
+}

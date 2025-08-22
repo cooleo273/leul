@@ -1,7 +1,8 @@
 import { home } from "./content";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = "https://demo.magic-portfolio.com";
+// Allow overriding via NEXT_PUBLIC_BASE_URL so deployments can set a proper domain
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "https://demo.magic-portfolio.com";
 
 const routes = {
   "/": true,
