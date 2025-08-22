@@ -24,7 +24,7 @@ const newsletter = {
 const social = [
   { name: "GitHub", icon: "github", link: "https://github.com/cooleo273" },
   { name: "LinkedIn", icon: "linkedin", link: "https://linkedin.com/in/leul-tadesse-386bb3225" },
-  { name: "Website", icon: "link", link: "https://leul-portfolio-273.vercel.app" },
+  { name: "Website", icon: "link", link: "https://leul-self.vercel.app" },
   { name: "Email", icon: "email", link: `mailto:${person.email}` },
 ];
 
