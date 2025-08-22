@@ -3,6 +3,7 @@ import { Column } from "@once-ui-system/core";
 import { headers } from 'next/headers';
 import { loadTranslations, Locale } from '@/i18n';
 import { ProjectCard } from "@/components";
+import { projects as projectIndex } from "@/resources";
 
 interface ProjectsProps {
   range?: [number, number?];
@@ -15,6 +16,23 @@ export async function Projects({ range }: ProjectsProps) {
   const t = loadTranslations(locale);
   const prefix = locale === 'am' ? '/am' : '';
   let allProjects = getPosts(["src", "app", "work", "projects"]);
+
+  // Fallback: if MDX files are not available in the serverless bundle, use the static index
+  if (!allProjects || allProjects.length === 0) {
+    allProjects = projectIndex.map((p) => ({
+      slug: p.slug,
+      // Minimal metadata; titles/summaries will be overridden by translations where available
+      metadata: {
+        title: p.title,
+        publishedAt: new Date().toISOString(),
+        summary: p.description,
+        images: p.images || [],
+        team: [],
+        link: p.href || "",
+      },
+      content: "",
+    }));
+  }
 
   const sortedProjects = allProjects.sort((a, b) => {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
