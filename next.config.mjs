@@ -20,16 +20,11 @@ const nextConfig = {
   experimental: {
     // Ensure MDX content directories are included in the serverless bundle for fs reads
     outputFileTracingIncludes: {
-      // Home uses Projects and Posts previews
-      "/src/app/page": [
-        "src/app/work/projects/**",
-        "src/app/blog/posts/**"
-      ],
-      // Work index and details
-      "/src/app/work/page": ["src/app/work/projects/**"],
-      "/src/app/work/[slug]/page": ["src/app/work/projects/**"],
-      // Blog details (if used)
-      "/src/app/blog/[slug]/page": ["src/app/blog/posts/**"],
+  // Route paths instead of file paths
+  "/": ["src/app/work/projects/**", "src/app/blog/posts/**"],
+  "/work": ["src/app/work/projects/**"],
+  "/work/[slug]": ["src/app/work/projects/**"],
+  "/blog/[slug]": ["src/app/blog/posts/**"],
     },
   },
 };
