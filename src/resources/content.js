@@ -244,6 +244,13 @@ const projects = [
     images: [],
     href: "/work/full-stack-ecommerce",
   },
+  {
+    slug: "shega-insight",
+    title: "Shega — Insight",
+    description: "Next.js dashboard for Shega that surfaces insights on Ethiopian startups (funding, investors, industries).",
+    images: [],
+    href: "/work/shega-insight",
+  },
 ];
 
 export { person, social, newsletter, home, about, blog, work, gallery, projects, technical };

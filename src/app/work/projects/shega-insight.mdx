@@ -1,0 +1,52 @@
+---
+title: "Shega — Insight"
+publishedAt: "2025-08-22"
+summary: "A Next.js dashboard that surfaces insights about Ethiopian startups — funding deals, industries, investors, and trends — built for Shega Media & Technologies."
+images: []
+team:
+  - name: "Leul Tadesse"
+    role: "Software Developer"
+    avatar: "/images/avatar.jpg"
+---
+
+## Overview
+
+Shega Insight is a Next.js dashboard I built for Shega Media & Technologies to centralize and surface data-driven insights about Ethiopian startups. It aggregates funding deals, investor activity, industry trends, and company profiles to help product and strategy teams make informed decisions.
+
+## Role
+
+I am working for Shega as a Software Developer on this project — responsible for data pipelines, frontend dashboards, and integrations with external data sources.
+
+## Technologies
+
+- Next.js (App Router)
+- TypeScript
+- Serverless API routes for ingestion and transforms
+- Recharts library
+
+## Implementation notes
+
+- Frontend: completed responsive Next.js frontend (App Router + TypeScript) with searchable catalog and dashboard views.
+- Data: we ingest and normalize records from Airtable using serverless API routes. Airtable is the source-of-truth for curated deal and company records.
+- Charts: visualizations are implemented with Recharts for fast, interactive charts (time-series, stacked area, bar charts) tuned for performance on large datasets.
+
+## What I built
+
+- ETL pipelines to ingest deal and company data from public sources and partner feeds.
+- A searchable catalog of startups with filters for industry, stage, and funding round.
+- Time-series visualizations for funding activity by industry and investor.
+- Exportable lists and CSV reports for analysts and business development.
+
+Additionally:
+
+- Frontend components include server-side rendered pages for SEO, client-side filters for instant exploration, and lazy-loaded chart data where appropriate to keep initial page loads quick.
+- Airtable sync runs on a schedule and provides change logs which are processed into the reporting database.
+
+## Outcome
+
+Delivered a production dashboard that reduced the time to find relevant leads and funding signals from days to minutes. The tool is used by Shega teams for market scans and investor outreach.
+
+## Next steps
+
+- Add automated alerts for new funding events matching custom criteria.
+- Integrate richer investor profiles and social signals.
