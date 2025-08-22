@@ -48,12 +48,16 @@ export async function Projects({ range }: ProjectsProps) {
         const override = t.work.projectTranslations[post.slug];
         const title = override?.title || post.metadata.title;
         const summary = override?.summary || post.metadata.summary;
+        const staticMeta = projectIndex.find((p) => p.slug === post.slug);
+        const images = (post.metadata.images && post.metadata.images.length > 0)
+          ? post.metadata.images
+          : (staticMeta?.images || []);
         return (
         <ProjectCard
           priority={index < 2}
           key={post.slug}
           href={`${prefix}/work/${post.slug}`}
-          images={post.metadata.images}
+          images={images}
           title={title}
           description={summary}
           content={post.content}

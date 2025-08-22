@@ -241,49 +241,72 @@ const projects = [
     title: "Full-Stack E-Commerce Platform",
     description:
       "Developed a complete e-commerce application (MERN) with product catalogs, auth, shopping cart, and payment integration.",
-    images: [],
+    images: [
+      "/images/projects/project-01/cover-01.jpg",
+      "/images/projects/project-01/cover-02.jpg",
+      "/images/projects/project-01/image-01.jpg"
+    ],
     href: "/work/full-stack-ecommerce",
   },
   {
     slug: "shega-insight",
     title: "Shega — Insight",
     description: "Next.js dashboard for Shega that surfaces insights on Ethiopian startups (funding, investors, industries).",
-    images: [],
+    images: [
+      "/images/projects/project-01/cover-03.jpg",
+      "/images/projects/project-01/cover-04.jpg",
+      "/images/projects/project-01/image-02.jpg"
+    ],
     href: "/work/shega-insight",
   },
   {
     slug: "shega-survey-platform",
     title: "Shega Media — Survey Platform",
     description: "A survey collection platform built with Next.js and Supabase to automate feedback collection and reporting.",
-    images: [],
+    images: [
+      "/images/projects/project-01/image-03.jpg",
+      "/images/projects/project-01/image-01.jpg"
+    ],
     href: "/work/shega-survey-platform",
   },
   {
     slug: "shega-hr-automation",
     title: "Shega Media — HR Automation (Power Apps)",
     description: "An HR automation system using Microsoft Power Apps to reduce manual entry and improve data consistency.",
-    images: [],
+    images: [
+      "/images/projects/project-01/image-02.jpg",
+      "/images/projects/project-01/cover-01.jpg"
+    ],
     href: "/work/shega-hr-automation",
   },
   {
     slug: "shega-profitability-dashboard",
     title: "Shega Media — Profitability Dashboard",
     description: "An internal profitability dashboard centralizing financial data to improve forecasting and decision-making.",
-    images: [],
+    images: [
+      "/images/projects/project-01/cover-02.jpg",
+      "/images/projects/project-01/image-03.jpg"
+    ],
     href: "/work/shega-profitability-dashboard",
   },
   {
     slug: "nexus-backtesting-platform",
     title: "Nexus — Backtesting Platform",
     description: "An end-to-end backtesting platform for traders with data ingestion, compute, and rich analytics.",
-    images: [],
+    images: [
+      "/images/projects/project-01/cover-04.jpg",
+      "/images/projects/project-01/cover-03.jpg"
+    ],
     href: "/work/nexus-backtesting-platform",
   },
   {
     slug: "schimerol-product",
     title: "Schimerol — Core Product",
     description: "Led end-to-end development of Schimerol's primary software product, building a scalable backend and APIs.",
-    images: [],
+    images: [
+      "/images/projects/project-01/image-01.jpg",
+      "/images/projects/project-01/image-02.jpg"
+    ],
     href: "/work/schimerol-product",
   },
 ];

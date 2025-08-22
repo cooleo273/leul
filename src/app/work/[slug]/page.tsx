@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPosts, getPostBySlug } from "@/utils/utils";
-import { projects as projectIndex } from "@/resources";
 import { Meta, Schema, AvatarGroup, Button, Column, Flex, Heading, Media, Text } from "@once-ui-system/core";
-import { baseURL, about, person, work } from "@/resources";
+import { baseURL, about, person, work, projects as projectIndex } from "@/resources";
 import { headers } from 'next/headers';
 import { loadTranslations, Locale } from '@/i18n';
 import { formatDate } from "@/utils/formatDate";
@@ -85,6 +84,11 @@ export default async function Project({
   const title = override?.title || post.metadata.title;
   const summary = override?.summary || post.metadata.summary;
 
+  const staticMeta = projectIndex.find((p) => p.slug === post.slug);
+  const heroImages = (post.metadata.images && post.metadata.images.length > 0)
+    ? post.metadata.images
+    : (staticMeta?.images || []);
+
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
       <Schema
@@ -108,13 +112,13 @@ export default async function Project({
         </Button>
         <Heading variant="display-strong-s">{title}</Heading>
       </Column>
-      {post.metadata.images.length > 0 && (
+    {heroImages.length > 0 && (
         <Media
           priority
           aspectRatio="16 / 9"
           radius="m"
           alt="image"
-          src={post.metadata.images[0]}
+      src={heroImages[0]}
           objectFit="contain"
         />
       )}
