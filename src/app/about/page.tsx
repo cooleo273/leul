@@ -13,39 +13,51 @@ import {
   Schema
 } from "@once-ui-system/core";
 import { baseURL, about, person, social } from "@/resources";
+import { headers } from 'next/headers';
+import { loadTranslations, Locale } from '@/i18n';
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
 import React from "react";
 
 export async function generateMetadata() {
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
+  const t = loadTranslations(locale);
+  const title = t.about.metaTitle.replace('{{name}}', person.name);
+  const description = t.about.metaDescription.replace('{{name}}', person.name);
   return Meta.generate({
-    title: about.title,
-    description: about.description,
+    title,
+    description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
+    image: `/api/og/generate?title=${encodeURIComponent(title)}`,
     path: about.path,
   });
 }
 
-export default function About() {
+export default async function About() {
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
+  const t = loadTranslations(locale);
   const structure = [
     {
-      title: about.intro.title,
+      title: t.about.sectionIntro,
       display: about.intro.display,
       items: [],
     },
     {
-      title: about.work.title,
+      title: t.about.sectionWork,
       display: about.work.display,
       items: about.work.experiences.map((experience) => experience.company),
     },
     {
-      title: about.studies.title,
+      title: t.about.sectionStudies,
       display: about.studies.display,
       items: about.studies.institutions.map((institution) => institution.name),
     },
     {
-      title: about.technical.title,
+      title: t.about.sectionTechnical,
       display: about.technical.display,
       items: about.technical.skills.map((skill) => skill.title),
     },
@@ -55,8 +67,8 @@ export default function About() {
       <Schema
         as="webPage"
         baseURL={baseURL}
-        title={about.title}
-        description={about.description}
+  title={t.about.metaTitle.replace('{{name}}', person.name)}
+  description={t.about.metaDescription.replace('{{name}}', person.name)}
         path={about.path}
         image={`/api/og/generate?title=${encodeURIComponent(about.title)}`}
         author={{
@@ -97,7 +109,7 @@ export default function About() {
             {person.languages.length > 0 && (
               <Flex wrap gap="8">
                 {person.languages.map((language, index) => (
-                  <Tag key={language} size="l">
+                  <Tag key={`${language}-${index}`} size="l">
                     {language}
                   </Tag>
                 ))}
@@ -122,7 +134,7 @@ export default function About() {
               variant="display-default-xs"
               onBackground="neutral-weak"
             >
-              {person.role}
+              {t.about.role}
             </Text>
             {social.length > 0 && (
               <Flex className={styles.blockAlign} paddingTop="20" paddingBottom="8" gap="8" wrap horizontal="center" fitWidth data-border="rounded">
@@ -157,14 +169,14 @@ export default function About() {
 
           {about.intro.display && (
             <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-              {about.intro.description}
+              {t.about.introDescription.replace('{{name}}', person.name)}
             </Column>
           )}
 
           {about.work.display && (
             <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
-                {about.work.title}
+              <Heading as="h2" id={t.about.sectionWork} variant="display-strong-s" marginBottom="m">
+                {t.about.sectionWork}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.work.experiences.map((experience, index) => (
@@ -181,21 +193,17 @@ export default function About() {
                       {experience.role}
                     </Text>
                     <Column as="ul" gap="16">
-                      {experience.achievements.map((achievement: React.ReactNode, index: number) => (
-                        <Text
-                          as="li"
-                          variant="body-default-m"
-                          key={`${experience.company}-${index}`}
-                        >
+                      {t.about.experiencesText[index]?.map((achievement: string, aIdx: number) => (
+                        <Text as="li" variant="body-default-m" key={`${experience.company}-${aIdx}`}>
                           {achievement}
                         </Text>
                       ))}
                     </Column>
                     {experience.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
+            {experience.images.map((image, index) => (
                           <Flex
-                            key={index}
+              key={`${experience.company}-img-${index}`}
                             border="neutral-medium"
                             radius="m"
                             //@ts-ignore
@@ -225,8 +233,8 @@ export default function About() {
 
           {about.studies.display && (
             <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
-                {about.studies.title}
+              <Heading as="h2" id={t.about.sectionStudies} variant="display-strong-s" marginBottom="m">
+                {t.about.sectionStudies}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.studies.institutions.map((institution, index) => (
@@ -235,7 +243,7 @@ export default function About() {
                       {institution.name}
                     </Text>
                     <Text variant="heading-default-xs" onBackground="neutral-weak">
-                      {institution.description}
+                      {t.about.studiesDescription}
                     </Text>
                   </Column>
                 ))}
@@ -243,15 +251,15 @@ export default function About() {
             </>
           )}
 
-          {about.technical.display && (
+      {about.technical.display && (
             <>
               <Heading
                 as="h2"
-                id={about.technical.title}
+        id={t.about.sectionTechnical}
                 variant="display-strong-s"
                 marginBottom="40"
               >
-                {about.technical.title}
+        {t.about.sectionTechnical}
               </Heading>
               <Column fillWidth gap="l">
                 {about.technical.skills.map((skill, index) => (
@@ -262,9 +270,9 @@ export default function About() {
                     </Text>
                     {(skill as any).images && (skill as any).images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
-                        {(skill as any).images.map((image: any, index: number) => (
+            {(skill as any).images.map((image: any, index: number) => (
                           <Flex
-                            key={index}
+              key={`${skill.title}-img-${index}`}
                             border="neutral-medium"
                             radius="m"
                             //@ts-ignore

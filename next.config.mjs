@@ -13,11 +13,6 @@ const nextConfig = {
     compiler: "modern",
     silenceDeprecations: ["legacy-js-api"],
   },
-  i18n: {
-    locales: ["en", "am"],
-    defaultLocale: "en",
-    localeDetection: true,
-  },
 };
 
 export default withMDX(nextConfig);

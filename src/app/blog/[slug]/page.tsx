@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { CustomMDX, ScrollToHash } from "@/components";
 import { Meta, Schema, AvatarGroup, Button, Column, Heading, HeadingNav, Icon, Row, Text } from "@once-ui-system/core";
 import { baseURL, about, blog, person } from "@/resources";
+import { headers } from 'next/headers';
+import { loadTranslations, Locale } from '@/i18n';
 import { formatDate } from "@/utils/formatDate";
 import { getPosts } from "@/utils/utils";
 import { Metadata } from 'next';
@@ -38,6 +40,10 @@ export async function generateMetadata({
 export default async function Blog({
   params
 }: { params: Promise<{ slug: string | string[] }> }) {
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
+  const t = loadTranslations(locale);
   const routeParams = await params;
   const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
 
@@ -72,8 +78,8 @@ export default async function Blog({
               image: `${baseURL}${person.avatar}`,
             }}
           />
-          <Button data-border="rounded" href="/blog" weight="default" variant="tertiary" size="s" prefixIcon="chevronLeft">
-            Posts
+          <Button data-border="rounded" href={`${locale === 'am' ? '/am' : ''}/blog`} weight="default" variant="tertiary" size="s" prefixIcon="chevronLeft">
+            {t.blog.backToPosts}
           </Button>
           <Heading variant="display-strong-s">{post.metadata.title}</Heading>
           <Row gap="12" vertical="center">
@@ -96,8 +102,8 @@ export default async function Blog({
         onBackground="neutral-medium"
         textVariant="label-default-s"
       >
-        <Icon name="document" size="xs" />
-        On this page
+  <Icon name="document" size="xs" />
+  {t.blog.onThisPage}
       </Row>
       <HeadingNav fitHeight/>
     </Column>

@@ -26,16 +26,25 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       setIsPasswordRequired(false);
       setIsAuthenticated(false);
 
-      const checkRouteEnabled = () => {
-        if (!pathname) return false;
+      // Normalize locale-prefixed paths like "/am/..." or "/en/..." to their base equivalent
+      const stripLocale = (path: string | null): string => {
+        if (!path) return "/";
+        // Replace a leading /en or /am (optionally followed by a slash) with just "/"
+        const normalized = path.replace(/^\/(en|am)(?=\/|$)/, "");
+        return normalized === "" ? "/" : normalized;
+      };
 
-        if (pathname in routes) {
-          return routes[pathname as keyof typeof routes];
+      const checkRouteEnabled = () => {
+        const effectivePath = stripLocale(pathname);
+        if (!effectivePath) return false;
+
+        if (effectivePath in routes) {
+          return routes[effectivePath as keyof typeof routes];
         }
 
         const dynamicRoutes = ["/blog", "/work"] as const;
         for (const route of dynamicRoutes) {
-          if (pathname?.startsWith(route) && routes[route]) {
+          if (effectivePath?.startsWith(route) && routes[route]) {
             return true;
           }
         }
@@ -46,7 +55,8 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       const routeEnabled = checkRouteEnabled();
       setIsRouteEnabled(routeEnabled);
 
-      if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
+      const effectivePath = stripLocale(pathname);
+      if (protectedRoutes[effectivePath as keyof typeof protectedRoutes]) {
         setIsPasswordRequired(true);
 
         const response = await fetch("/api/check-auth");

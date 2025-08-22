@@ -1,16 +1,19 @@
 import { notFound } from "next/navigation";
-import { getPosts } from "@/utils/utils";
+import { getPosts, getPostBySlug } from "@/utils/utils";
 import { Meta, Schema, AvatarGroup, Button, Column, Flex, Heading, Media, Text } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
+import { headers } from 'next/headers';
+import { loadTranslations, Locale } from '@/i18n';
 import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  // Ensure we only output base slugs
+  return posts
+    .filter((post) => !/\.[a-z]{2}$/i.test(post.slug))
+    .map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -26,11 +29,20 @@ export async function generateMetadata({
 
   if (!post) return {};
 
+  // Localize
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
+  const t = loadTranslations(locale);
+  const override = t.work.projectTranslations[post.slug];
+  const title = override?.title || post.metadata.title;
+  const summary = override?.summary || post.metadata.summary;
+
   return Meta.generate({
-    title: post.metadata.title,
-    description: post.metadata.summary,
+    title,
+    description: summary,
     baseURL: baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
+    image: post.metadata.image || `/api/og/generate?title=${title}`,
     path: `${work.path}/${post.slug}`,
   });
 }
@@ -41,16 +53,24 @@ export default async function Project({
   const routeParams = await params;
   const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
 
-  let post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slugPath);
+  // Determine locale from headers for localized MDX resolution
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
 
-  if (!post) {
-    notFound();
-  }
+  // Prefer locale-specific MDX (e.g., slug.am.mdx) with fallback to base
+  const post = getPostBySlug(["src", "app", "work", "projects"], slugPath, locale);
 
   const avatars =
     post.metadata.team?.map((person) => ({
       src: person.avatar,
     })) || [];
+
+  // Localize strings
+  const t = loadTranslations(locale);
+  const override = t.work.projectTranslations[post.slug];
+  const title = override?.title || post.metadata.title;
+  const summary = override?.summary || post.metadata.summary;
 
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
@@ -58,11 +78,11 @@ export default async function Project({
         as="blogPosting"
         baseURL={baseURL}
         path={`${work.path}/${post.slug}`}
-        title={post.metadata.title}
-        description={post.metadata.summary}
+        title={title}
+        description={summary}
         datePublished={post.metadata.publishedAt}
         dateModified={post.metadata.publishedAt}
-        image={post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`}
+        image={post.metadata.image || `/api/og/generate?title=${encodeURIComponent(title)}`}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -70,10 +90,10 @@ export default async function Project({
         }}
       />
       <Column maxWidth="xs" gap="16">
-        <Button data-border="rounded" href="/work" variant="tertiary" weight="default" size="s" prefixIcon="chevronLeft">
-          Projects
+        <Button data-border="rounded" href={`${locale === 'am' ? '/am' : ''}/work`} variant="tertiary" weight="default" size="s" prefixIcon="chevronLeft">
+          {t.work.backToProjects}
         </Button>
-        <Heading variant="display-strong-s">{post.metadata.title}</Heading>
+        <Heading variant="display-strong-s">{title}</Heading>
       </Column>
       {post.metadata.images.length > 0 && (
         <Media

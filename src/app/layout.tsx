@@ -3,6 +3,7 @@ import '@once-ui-system/core/css/tokens.css';
 import '@/resources/custom.css'
 
 import classNames from "classnames";
+import { headers } from 'next/headers';
 
 import { Background, Column, Flex, Meta, opacity, SpacingToken, LayoutProvider } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from '@/components';
@@ -25,11 +26,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const h = headers();
+  const headerLocale = (await h).get('x-locale');
+  const lang = headerLocale === 'am' ? 'am' : 'en';
   return (
     <Flex
       suppressHydrationWarning
       as="html"
-      lang="en"
+      lang={lang}
       fillWidth
       className={classNames(
         fonts.heading.variable,

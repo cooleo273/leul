@@ -3,6 +3,7 @@
 import { Column, Flex, Heading, Media, SmartLink, Tag, Text } from '@once-ui-system/core';
 import styles from './Posts.module.scss';
 import { formatDate } from '@/utils/formatDate';
+import { usePathname } from 'next/navigation';
 
 interface PostProps {
     post: any;
@@ -11,13 +12,15 @@ interface PostProps {
 }
 
 export default function Post({ post, thumbnail, direction }: PostProps) {
+    const pathname = usePathname() ?? '';
+    const prefix = pathname.startsWith('/am/') || pathname === '/am' ? '/am' : '';
     return (
         <SmartLink
             fillWidth
             unstyled
             style={{ borderRadius: 'var(--radius-l)' }}
             key={post.slug}
-            href={`/blog/${post.slug}`}>
+            href={`${prefix}/blog/${post.slug}`}>
             <Flex
                 position="relative"
                 transition="micro-medium"

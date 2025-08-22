@@ -2,14 +2,19 @@ import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Meta, Schema } from "@once-ui-system/core";
 import { home, about, person, newsletter, baseURL, routes } from "@/resources";
-import { loadTranslations } from '@/i18n';
+import { headers } from 'next/headers';
+import { loadTranslations, Locale } from '@/i18n';
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 
 export default async function Home() {
-  const translations = loadTranslations('en');
-  const tHome = (translations && translations.home) || {};
+  const h = headers();
+  const headerLocale = (await h).get('x-locale') as Locale | null;
+  const locale: Locale = headerLocale === 'am' ? 'am' : 'en';
+  const translations = loadTranslations(locale);
+  const tHome = translations.home;
+  const tNav = translations.nav;
   return (
     <Column maxWidth="m" gap="xl" horizontal="center">
       <Schema
@@ -37,12 +42,12 @@ export default async function Home() {
           )}
           <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
             <Heading wrap="balance" variant="display-strong-l">
-              {tHome.headline || home.headline}
+              {tHome.headline}
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {tHome.subline ? tHome.subline.replace('{{name}}', person.name) : home.subline}
+              {tHome.subline.replace('{{name}}', person.name)}
             </Text>
           </RevealFx>
           <RevealFx paddingTop="12" delay={0.4} horizontal="start" paddingLeft="12">
@@ -64,7 +69,7 @@ export default async function Home() {
                     size="m"
                   />
                 )}
-                {about.title}
+                {tHome.aboutCta.replace('{{name}}', person.name)}
               </Flex>
             </Button>
           </RevealFx>
@@ -77,7 +82,7 @@ export default async function Home() {
   <Flex fillWidth gap="24">
           <Flex flex={1} paddingLeft="l" paddingTop="24">
             <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              Latest from the blog
+              {tHome.latestFromBlog}
             </Heading>
           </Flex>
           <Flex flex={3} paddingX="20">

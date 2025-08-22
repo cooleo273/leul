@@ -1,43 +1,63 @@
 "use client";
 
-import React from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Flex, ToggleButton, Line, Icon } from "@once-ui-system/core";
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const pathname = usePathname() || '/';
+  const pathname = usePathname() || "/";
   const searchParams = useSearchParams();
 
-  function switchLocale(locale: string) {
-//     try {
-//   // Remove existing locale prefix if present
-//   const base = pathname.replace(/^\/(en|am)/, '') || '/';
-//   // Normalize base: use '' for root to avoid producing '/am/' and double slashes
-//   const baseClean = base === '/' ? '' : base;
-//   // For the default locale (en) use the unprefixed path; for others prefix the locale
-//   const newPath = locale === 'en' ? (baseClean || '/') : `/${locale}${baseClean}`;
-//       const query = searchParams ? searchParams.toString() : '';
-//       const finalPath = query ? `${newPath}?${query}` : newPath;
+  const isAm = pathname.startsWith("/am/") || pathname === "/am";
 
-//   // Debug: log computed path so you can inspect in the browser console
-//   // (helpful if switching appears to do nothing or shows an error)
-//   // eslint-disable-next-line no-console
-//   console.log('[LanguageSwitcher] switch', { locale, pathname, finalPath });
+  function navigateToLocale(locale: "en" | "am") {
+    const base = pathname.replace(/^\/(en|am)(?=\/|$)/, "") || "/";
+    const baseClean = base === "/" ? "" : base;
+    const newPath =
+      locale === "en" ? baseClean || "/" : `/${locale}${baseClean}`;
 
-//       // Use replace to avoid adding history entry when switching languages
-//   // Use replace to avoid adding a history entry when switching languages
-//   router.replace(finalPath);
-//     } catch (e) {
-//       // Fallback: reload with simple path
-//       window.location.href = `/${locale}${pathname}`;
-//     }
-console.log('switch locale to', locale);
+    const query = searchParams ? searchParams.toString() : "";
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    const finalPath = `${newPath}${query ? `?${query}` : ""}${hash || ""}`;
+
+    try {
+      router.replace(finalPath);
+    } catch {
+      window.location.href = finalPath;
+    }
   }
 
   return (
-    <div style={{ display: 'flex', gap: '8px' }}>
-      <button aria-label="Switch to English" onClick={() => switchLocale('en')}>EN</button>
-      <button aria-label="Switch to Amharic" onClick={() => switchLocale('am')}>AM</button>
-    </div>
+    <Flex
+      role="group"
+      aria-label="Language switcher"
+      horizontal="center"
+      vertical="center"
+      gap="4"
+      padding="4"
+      background="page"
+      border="neutral-alpha-weak"
+      radius="m-4"
+      shadow="m"
+      zIndex={10}
+    >
+      <Icon name="globe" size="xs" onBackground="neutral-weak" />
+      <Line vert maxHeight="24" background="neutral-alpha-medium" />
+      <ToggleButton
+        size="s"
+        label="EN"
+        aria-label="Switch to English"
+        selected={!isAm}
+        onClick={() => navigateToLocale("en")}
+      />
+      <ToggleButton
+        size="s"
+        label="AM"
+        aria-label="Switch to Amharic"
+        selected={isAm}
+        onClick={() => navigateToLocale("am")}
+      />
+    </Flex>
   );
 }

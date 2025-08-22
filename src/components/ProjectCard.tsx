@@ -9,6 +9,8 @@ import {
   SmartLink,
   Text,
 } from "@once-ui-system/core";
+import { usePathname } from "next/navigation";
+import { loadTranslations, Locale } from "@/i18n";
 
 interface ProjectCardProps {
   href: string;
@@ -30,6 +32,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   avatars,
   link,
 }) => {
+  const pathname = usePathname() ?? "";
+  const isAm = pathname.startsWith("/am/") || pathname === "/am";
+  const locale: Locale = isAm ? 'am' : 'en';
+  const t = loadTranslations(locale);
   return (
     <Column fillWidth gap="m">
       <Carousel
@@ -62,13 +68,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </Text>
             )}
             <Flex gap="24" wrap>
-              {content?.trim() && (
+        {content?.trim() && (
                 <SmartLink
                   suffixIcon="arrowRight"
                   style={{ margin: "0", width: "fit-content" }}
                   href={href}
                 >
-                  <Text variant="body-default-s">Read case study</Text>
+          <Text variant="body-default-s">{t.work.readCaseStudy}</Text>
                 </SmartLink>
               )}
               {link && (
@@ -77,7 +83,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={{ margin: "0", width: "fit-content" }}
                   href={link}
                 >
-                  <Text variant="body-default-s">View project</Text>
+          <Text variant="body-default-s">{t.work.viewProject}</Text>
                 </SmartLink>
               )}
             </Flex>
