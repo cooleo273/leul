@@ -20,15 +20,9 @@ export function middleware(request: NextRequest) {
         headers: requestHeaders,
       },
     });
-    response.cookies.set('locale', 'am', { path: '/' });
+  // Limit the cookie to /am so it won't affect English pages
+  response.cookies.set('locale', 'am', { path: '/am' });
     return response;
-  }
-
-  // If a cookie exists from prior /am navigation, propagate header
-  if (request.cookies.get('locale')?.value === 'am') {
-    const res = NextResponse.next();
-    res.headers.set('x-locale', 'am');
-    return res;
   }
 
   return NextResponse.next();
