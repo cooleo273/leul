@@ -23,8 +23,10 @@ type Metadata = {
 import { notFound } from 'next/navigation';
 
 function getMDXFiles(dir: string) {
+  // In some serverless environments, the raw source directory might not be file-traced.
+  // Return an empty list instead of triggering a 404 so pages can still render without content.
   if (!fs.existsSync(dir)) {
-    notFound();
+    return [] as string[];
   }
 
   // Only return base .mdx files (exclude locale-suffixed variants like *.am.mdx)
@@ -57,6 +59,7 @@ function readMDXFile(filePath: string) {
 
 function getMDXData(dir: string) {
   const mdxFiles = getMDXFiles(dir);
+  if (!mdxFiles.length) return [] as Array<{ metadata: Metadata; slug: string; content: string }>;
   return mdxFiles.map((file) => {
     const { metadata, content } = readMDXFile(path.join(dir, file));
     const slug = path.basename(file, path.extname(file));

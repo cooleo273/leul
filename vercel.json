@@ -1,0 +1,9 @@
+{
+  "buildCommand": "NEXT_IGNORE_ESLINT=1 next build",
+  "functions": {
+    "api/**": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}

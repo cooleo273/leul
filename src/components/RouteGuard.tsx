@@ -36,20 +36,26 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 
       const checkRouteEnabled = () => {
         const effectivePath = stripLocale(pathname);
-        if (!effectivePath) return false;
+        if (!effectivePath) return true; // be permissive by default
 
-        if (effectivePath in routes) {
-          return routes[effectivePath as keyof typeof routes];
+        // Exact route match: only block if explicitly set to false
+        const hasExact = Object.prototype.hasOwnProperty.call(routes, effectivePath);
+        if (hasExact) {
+          const flag = (routes as Record<string, unknown>)[effectivePath];
+          return flag !== false;
         }
 
-        const dynamicRoutes = ["/blog", "/work"] as const;
-        for (const route of dynamicRoutes) {
-          if (effectivePath?.startsWith(route) && routes[route]) {
-            return true;
+        // Dynamic sections: only block if parent route is explicitly false
+        const dynamicParents = ["/blog", "/work"] as const;
+        for (const parent of dynamicParents) {
+          if (effectivePath.startsWith(parent)) {
+            const parentFlag = (routes as Record<string, unknown>)[parent];
+            return parentFlag !== false; // treat undefined as allowed
           }
         }
 
-        return false;
+        // Unknown paths: allow and let Next.js routing handle actual 404s
+        return true;
       };
 
       const routeEnabled = checkRouteEnabled();
