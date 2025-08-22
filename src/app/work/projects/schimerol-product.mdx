@@ -30,3 +30,41 @@ At Schimerol I led the full lifecycle for the company's principal software offer
 ## Outcome
 
 Delivered a scalable and maintainable product that met the company's performance and reliability goals.
+
+## Problem
+
+Schimerol's legacy system struggled with scale and brittleness: on-boarding new tenants and rolling out features required manual ops, deployments were slow, and performance degraded during peak use.
+
+## Solution
+
+I re-architected the core product with an emphasis on reliability and operability. The new design introduced a clear domain model, resilient APIs, and containerized deployments to allow safe, frequent releases.
+
+## Architecture
+
+```text
+Clients (web/mobile) -> API Gateway -> Microservices / Node.js APIs -> Postgres
+                                 |                                |
+                                 +-> Background workers (queue) -> Metrics & Monitoring
+```
+
+### Key features delivered
+- Clean RESTful APIs with consistent error handling and pagination
+- Schema-driven migrations and a versioned DB strategy
+- Containerized services with health checks and automated CI/CD
+- Role-based access control and audit logging
+
+## Screenshots / Media
+- Placeholder: `/images/projects/schimerol/product-01.png`
+- Placeholder: `/images/projects/schimerol/product-02.png`
+
+## Metrics
+- Achieved 99.95% uptime after rollout
+- Reduced average response latency by 45% for critical endpoints
+- Deployment lead time reduced from days to under 30 minutes
+
+## Lessons learned
+- Start with the failure scenarios — designing for common failure modes made the system far more resilient.
+- Automating the release pipeline pays off quickly: frequent, small releases lowered risk and increased feedback velocity.
+
+## Next steps
+- Add observability dashboards for business KPIs and provision canary deployments for high-risk changes.

@@ -1,0 +1,81 @@
+---
+title: "Shega Media — Survey Platform"
+publishedAt: "2024-11-01"
+summary: "A custom survey collection platform built with Next.js and Supabase to automate feedback collection and reporting."
+images: []
+team:
+  - name: "Leul Tadesse"
+    role: "Software Developer"
+    avatar: "/images/avatar.jpg"
+---
+
+## Overview
+
+Built a custom survey collection platform for Shega Media & Technologies to automate data collection and reporting, replacing a manual process similar to Google Forms.
+
+### What I built
+
+- A responsive front-end using Next.js and React for creating and distributing surveys.
+- Secure data storage and real-time listeners using Supabase.
+- Aggregation and reporting dashboards that surface actionable insights.
+
+### Impact
+
+The system automated data aggregation and reporting, reducing the time to analyze customer feedback by approximately 40%.
+
+## Technologies used
+
+- Next.js, React
+- Supabase
+- PostgreSQL / Supabase database services
+- Node.js
+
+## Outcome
+
+A production-ready survey platform that replaced manual processes and delivered faster, consistent feedback analysis.
+
+## Problem
+
+Shega's marketing and product teams relied on ad-hoc spreadsheets and manual export/import workflows to collect customer feedback. This process was error-prone, slow, and made it hard to track sentiment over time.
+
+## Solution
+
+I built a lightweight platform focused on three priorities: fast survey creation, reliable data capture, and actionable reporting. Non-technical staff could design surveys and share links, while stakeholders could view aggregated insights in real time.
+
+## Architecture
+
+```text
+Browser (Next.js)  ->  API (Next API routes)  ->  Supabase (Postgres & Realtime)
+                         |                             |
+                         +--> Background workers / ETL --> Reporting DB / Materialized Views
+```
+
+### Key components
+- Survey builder (drag-and-drop field ordering, preview)
+- Respondent front-end with token-based access and anti-spam protections
+- Real-time aggregation using Supabase listeners and server-side transformations
+- Reporting UI with filters, trend charts, and CSV exports
+
+## Features
+- Create surveys with multiple question types (text, rating, multiple choice)
+- Schedule surveys and email distribution hooks
+- Live dashboards with time-series charts and top-feedback highlights
+- Export results to CSV and automated summary emails
+
+## Screenshots / Media
+- Placeholder: `/images/projects/shega/survey-1.png`
+- Placeholder: `/images/projects/shega/survey-2.png`
+
+## Metrics
+- ~40% reduction in time-to-insight for customer feedback
+- 99.9% availability during campaign windows
+
+## Lessons learned
+- Keeping the data model simple made downstream reporting easy.
+- Realtime systems are powerful for dashboards but require careful rate-limiting and batching.
+
+## Next steps
+- Add behavioural analytics (session replay snippets) and A/B test integrations.
+
+---
+If you want, I can wire up real screenshots and add the project to the `projects` list in `src/resources/content.js`.

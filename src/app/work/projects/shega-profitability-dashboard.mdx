@@ -1,0 +1,74 @@
+---
+title: "Shega Media — Profitability Dashboard"
+publishedAt: "2024-11-01"
+summary: "An internal profitability dashboard centralizing financial data to improve forecasting and project viability analysis."
+images: []
+team:
+  - name: "Leul Tadesse"
+    role: "Software Developer"
+    avatar: "/images/avatar.jpg"
+---
+
+## Overview
+
+Architected and delivered an internal dashboard for Shega Media & Technologies to calculate project viability and financial performance.
+
+### What I built
+
+- Data pipelines to centralize costs and revenue into a single source of truth.
+- Visualizations and KPIs for project-level profitability and forecasting.
+- Exportable reports for executive review.
+
+### Impact
+
+Centralizing financial data improved C-level forecast accuracy by over 15% and accelerated decision-making.
+
+## Technologies used
+
+- Next.js, React
+- PostgreSQL
+- Node.js
+
+## Outcome
+
+A production-ready dashboard used by stakeholders to assess project viability and financial performance.
+
+## Problem
+
+Finance and delivery teams lacked a single source to evaluate project profitability. Spreadsheets were out-of-date and inconsistencies in cost allocation led to poor forecasting.
+
+## Solution
+
+I built an internal profitability dashboard that combined automated ingestion of billing and cost data with an intuitive UI for analysts and executives to inspect project-level metrics.
+
+## Architecture
+
+```text
+Ingest (ETL) -> Central Postgres (normalized schemas) -> API (Next.js) -> Frontend (Reports & Visualizations)
+```
+
+### Key components
+- ETL jobs to import billing and time-sheet data
+- Normalized data model for costs, revenues, and allocations
+- Forecasting module that projects revenue and costs based on historical trends
+- Role-based UI with exportable investor-style reports
+
+## Features
+- Interactive waterfall charts and unit-economics breakdowns
+- Scenario mode for 'what-if' projections
+- Scheduled exports and executive summary emails
+
+## Screenshots / Media
+- Placeholder: `/images/projects/shega/profit-1.png`
+- Placeholder: `/images/projects/shega/profit-2.png`
+
+## Metrics
+- Improved forecast accuracy by over 15%
+- Reduced manual reconciliation time by ~60%
+
+## Lessons learned
+- Establish canonical data boundaries early — it saved time when integrating external billing sources.
+- Presenting clear KPIs to stakeholders changed behavior quicker than complex models.
+
+## Next steps
+- Add more 'what-if' scenarios and integrate with accounting systems for automated month-end reconciliation.

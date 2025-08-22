@@ -34,3 +34,40 @@ Developed a full-featured e-commerce web application from concept to deployment 
 ## Outcome
 
 Delivered a production-ready e-commerce application demonstrating end-to-end system design, secure authentication, and payment flows.
+
+## Problem
+
+Small merchants needed an easy way to sell products online but existing platforms were either expensive or inflexible for custom workflows.
+
+## Solution
+
+Built a full-stack e-commerce platform that balanced a flexible product model with secure, scalable infrastructure. The platform prioritized developer productivity and merchant customization.
+
+## Architecture
+
+```text
+Browser (React) -> API (Express/Node) -> Database (MongoDB) -> Payment gateway
+```
+
+### Key features
+- Product catalog with categories, tags, and full-text search
+- User accounts, order history, and JWT-secured APIs
+- Shopping cart with persistent session storage
+- Integration with Stripe (or other payment processor)
+- Admin panel for product and order management
+
+## Screenshots / Media
+- Placeholder: `/images/projects/ecommerce/ecom-01.jpg`
+- Placeholder: `/images/projects/ecommerce/ecom-02.jpg`
+- Placeholder: `/images/projects/ecommerce/ecom-03.jpg`
+
+## Metrics
+- Supported thousands of SKUs and scaled across read replicas for product traffic
+- Reduced checkout abandonment with optimized flows and cart persistence
+
+## Lessons learned
+- Keep the product model flexible but constrained: support common workflows while allowing customization through extensions.
+- Security and proper token management are critical for payment flows.
+
+## Next steps
+- Add multi-tenant features, better inventory forecasting, and more payment options.

@@ -36,3 +36,39 @@ I architected and built the Nexus backtesting platform from the ground up, ownin
 ## Outcome
 
 Delivered a robust and feature-rich application that enabled traders to iterate quickly on strategies with accurate historical simulations.
+
+## Problem
+
+Traders lacked a reliable environment to validate strategies at scale. Existing tools were either too slow for large datasets or required extensive manual configuration.
+
+## Solution
+
+I designed a system optimized for large-scale backtesting: efficient data ingestion and a compute layer that executed user strategies in isolated, reproducible runs. The UI made it simple to configure experiments and compare results.
+
+## Architecture
+
+```text
+Data Ingest -> Partitioned Time-Series Storage -> Compute Cluster (worker pool) -> Results Store -> UI
+```
+
+### Key features
+- Fast data ingestion and normalization pipelines
+- Strategy sandboxing and deterministic execution
+- Rich visualizations (equity curves, drawdown, heatmaps)
+- Compare multiple runs side-by-side and export results
+
+## Screenshots / Media
+- Placeholder: `/images/projects/nexus/nexus-01.jpg`
+- Placeholder: `/images/projects/nexus/nexus-02.jpg`
+- Placeholder: `/images/projects/nexus/nexus-03.jpg`
+
+## Metrics
+- Handled backtests over datasets with millions of rows with acceptable latency
+- Reduced experiment turnaround time from hours to minutes for many strategy types
+
+## Lessons learned
+- Determinism matters: ensuring runs are reproducible simplified debugging and user trust.
+- A small compute cluster with good caching provides massive speedups for repeated queries.
+
+## Next steps
+- Add distributed backtesting support and cloud-based spot compute for burst workloads.
