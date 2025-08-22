@@ -251,6 +251,41 @@ const projects = [
     images: [],
     href: "/work/shega-insight",
   },
+  {
+    slug: "shega-survey-platform",
+    title: "Shega Media — Survey Platform",
+    description: "A survey collection platform built with Next.js and Supabase to automate feedback collection and reporting.",
+    images: [],
+    href: "/work/shega-survey-platform",
+  },
+  {
+    slug: "shega-hr-automation",
+    title: "Shega Media — HR Automation (Power Apps)",
+    description: "An HR automation system using Microsoft Power Apps to reduce manual entry and improve data consistency.",
+    images: [],
+    href: "/work/shega-hr-automation",
+  },
+  {
+    slug: "shega-profitability-dashboard",
+    title: "Shega Media — Profitability Dashboard",
+    description: "An internal profitability dashboard centralizing financial data to improve forecasting and decision-making.",
+    images: [],
+    href: "/work/shega-profitability-dashboard",
+  },
+  {
+    slug: "nexus-backtesting-platform",
+    title: "Nexus — Backtesting Platform",
+    description: "An end-to-end backtesting platform for traders with data ingestion, compute, and rich analytics.",
+    images: [],
+    href: "/work/nexus-backtesting-platform",
+  },
+  {
+    slug: "schimerol-product",
+    title: "Schimerol — Core Product",
+    description: "Led end-to-end development of Schimerol's primary software product, building a scalable backend and APIs.",
+    images: [],
+    href: "/work/schimerol-product",
+  },
 ];
 
 export { person, social, newsletter, home, about, blog, work, gallery, projects, technical };

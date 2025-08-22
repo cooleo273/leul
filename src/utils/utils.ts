@@ -21,6 +21,7 @@ type Metadata = {
 };
 
 import { notFound } from 'next/navigation';
+import { projects as projectIndex } from '@/resources';
 
 function getMDXFiles(dir: string) {
   // In some serverless environments, the raw source directory might not be file-traced.
@@ -88,14 +89,33 @@ function getLocalizedFilePath(dir: string, slug: string, locale?: string) {
   const base = path.join(dir, `${slug}.mdx`);
   if (fs.existsSync(base)) return base;
 
-  // Nothing found -> 404
-  notFound();
+  // Nothing found -> return null so caller can fallback
+  return null as unknown as string;
 }
 
 // Get a single post by slug, resolving a locale-specific MDX file when available.
 export function getPostBySlug(customPath: string[], slug: string, locale?: string) {
   const postsDir = path.join(process.cwd(), ...customPath);
   const filePath = getLocalizedFilePath(postsDir, slug, locale);
-  const { metadata, content } = readMDXFile(filePath);
-  return { metadata, slug, content };
+  if (filePath) {
+    const { metadata, content } = readMDXFile(filePath);
+    return { metadata, slug, content };
+  }
+  // Fallback to static project index when MDX is unavailable
+  const fallback = projectIndex.find((p) => p.slug === slug);
+  if (fallback) {
+    const metadata: Metadata = {
+      title: fallback.title,
+      publishedAt: new Date().toISOString(),
+      summary: fallback.description,
+      image: '',
+      images: fallback.images || [],
+      tag: undefined,
+      team: [],
+      link: fallback.href || '',
+    };
+    return { metadata, slug, content: '' };
+  }
+  // Truly unknown slug
+  notFound();
 }

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPosts, getPostBySlug } from "@/utils/utils";
+import { projects as projectIndex } from "@/resources";
 import { Meta, Schema, AvatarGroup, Button, Column, Flex, Heading, Media, Text } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { headers } from 'next/headers';
@@ -10,8 +11,9 @@ import { Metadata } from "next";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
+  const list = posts.length ? posts : projectIndex.map((p) => ({ metadata: { publishedAt: new Date().toISOString() }, slug: p.slug, content: '' } as any));
   // Ensure we only output base slugs
-  return posts
+  return list
     .filter((post) => !/\.[a-z]{2}$/i.test(post.slug))
     .map((post) => ({ slug: post.slug }));
 }
@@ -25,7 +27,18 @@ export async function generateMetadata({
   const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
 
   const posts = getPosts(["src", "app", "work", "projects"])
-  let post = posts.find((post) => post.slug === slugPath);
+  let post = posts.find((post) => post.slug === slugPath) || (projectIndex.find((p) => p.slug === slugPath) ? {
+    slug: slugPath,
+    metadata: {
+      title: projectIndex.find((p) => p.slug === slugPath)!.title,
+      publishedAt: new Date().toISOString(),
+      summary: projectIndex.find((p) => p.slug === slugPath)!.description,
+      images: projectIndex.find((p) => p.slug === slugPath)!.images || [],
+      team: [],
+      link: projectIndex.find((p) => p.slug === slugPath)!.href || '',
+    },
+    content: ''
+  } as any : undefined);
 
   if (!post) return {};
 
